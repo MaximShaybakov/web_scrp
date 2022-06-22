@@ -8,7 +8,7 @@ class Web_Scp():
     def __init__(self):
         self.URL = 'https://habr.com' # для удобства создания ссылок в дальнейшем
         self.direct = '/ru/all/'
-        self.KEYWORDS = ['дизайн', 'фото', 'web', 'python', 'для'] # добавил "для", так как бывает нет совпадений
+        self.KEYWORDS = ['дизайн', 'фото', 'web', 'python', 'обкафкился'] # добавил "для", так как бывает нет совпадений
 
 
     def _text_page(self) -> str:
@@ -24,7 +24,7 @@ class Web_Scp():
             datatime = coin.time['title']
             name_article = coin.find(class_='tm-article-snippet__title-link').span.text
             link = f"{self.URL + coin.find(class_='tm-article-snippet__title-link')['href']}"
-            coin_ = set(name_article.split()) & set(self.KEYWORDS)
+            coin_ = set(name_article.lower().split()) & set(self.KEYWORDS)
             if len(coin_) > 0:
                 elements.append(f'{datatime} - {name_article} - {link}')
                 link_ls.append(link)
