@@ -7,7 +7,7 @@ class Web_Scp():
     def __init__(self):
         self.URL = 'https://habr.com' # для удобства создания ссылок в дальнейшем
         self.direct = '/ru/all/'
-        self.KEYWORDS = ['дизайн', 'фото', 'web', 'python']
+        self.KEYWORDS = ['дизайн', 'фото', 'web', 'python', 'для']
 
 
     def text_page(self) -> str:
@@ -22,23 +22,13 @@ class Web_Scp():
             datatime = coin.time['title']
             name_article = coin.find(class_='tm-article-snippet__title-link').span.text
             link = f"{self.URL + coin.find(class_='tm-article-snippet__title-link')['href']}"
-            elements.append(f'{datatime} - {name_article} - {link}')
+            coin_ = set(name_article.split()) & set(self.KEYWORDS)
+            if len(coin_) > 0:
+                elements.append(f'{datatime} - {name_article} - {link}')
+        print(elements)
         return elements
-
-
-    def search_coincidence(self):
-        article_ls = []
-        for name in self.pars_text():
-            if name in self.KEYWORDS:
-                print(name)
-                article_ls.append(name)
-        if len(article_ls) == 0:
-            print(f"[!] На данный момент нет совпадений по {self.KEYWORDS}.")
-        return article_ls
-
-    # у меня получился пустой список так как небыло совпадений
 
 
 if __name__ == '__main__':
     test = Web_Scp()
-    test.search_coincidence()
+    test.pars_text()
