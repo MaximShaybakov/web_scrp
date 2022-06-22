@@ -3,6 +3,7 @@ import requests
 
 
 class Web_Scp():
+    '''класс только в качестве тренировки ООП'''
 
     def __init__(self):
         self.URL = 'https://habr.com' # для удобства создания ссылок в дальнейшем
